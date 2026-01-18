@@ -27,3 +27,18 @@
 - 📝 REST-style API design
 
 - 🛠 Configurable via .env and settings
+
+
+
+Blog_management_API_V4/
+├── project/                       # Django project config
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── account/                       # User models, serializers, views
+├── blog/                          # Blog management (posts, categories, etc.)
+├── requirements.txt              # Python dependencies
+├── docker-compose.yml            # Docker services
+├── Dockerfile                    # Docker image build
+└── .env                          # Environment variables (not committed)
+
