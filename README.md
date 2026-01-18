@@ -1,3 +1,18 @@
 # Blog-API-advanced_ver2
-Authentication  &amp; Custom user model using  AbstractBaseUser with django rest framework
-#django
+🚀 Features
+
+- 🔐 JWT Authentication (login/sign-up)
+
+- 👤 Custom User Model
+
+- 📰 Blog Posts CRUD
+
+- 🗂️ Category and Tag Management
+
+- 💬 Comment System
+
+- 🔎 Filtering, pagination, and search support
+
+- 📝 REST-style API design
+
+- 🛠 Configurable via .env and settings
