@@ -17,9 +17,9 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
                                             ])
     description    = serializers.CharField(required=False) 
     # url - mean -> category detail and use HyperlinkedIdentityField
-    url = serializers.HyperlinkedIdentityField(read_only=True, view_name='blogApp:category-detail', lookup_field='slug')   # view_name='{model_name}-detail'
+    url = serializers.HyperlinkedIdentityField(read_only=True, view_name='blogApp:category-detail', lookup_field='slug', lookup_url_kwarg='slug')   # view_name='{model_name}-detail'
     # related_name -->> come from ForeignKey in Post model
-    posts_category  = serializers.HyperlinkedRelatedField(read_only=True, view_name='blogApp:post-detail',lookup_field='slug' ,many=True, )
+    posts_category  = serializers.HyperlinkedRelatedField(read_only=True, view_name='blogApp:post-detail', lookup_field='slug', lookup_url_kwarg='slug', many=True)
     
 
     class Meta:
@@ -49,7 +49,7 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
     
 class TagSerializer(serializers.HyperlinkedModelSerializer):
     # related_name -->> come from mManyToManyField in Post model  
-    posts_tags  = serializers.HyperlinkedRelatedField(read_only=True,view_name='blogApp:post-detail',many=True,lookup_field='slug' )
+    posts_tags  = serializers.HyperlinkedRelatedField(read_only=True, view_name='blogApp:post-detail', many=True, lookup_field='slug', lookup_url_kwarg='slug')
                             
     class Meta:
         model  = Tag 
@@ -71,7 +71,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     ]) 
     body          = serializers.CharField(required=True,style={'base_template': 'textarea.html'} )
     # url - mean -> post detail and use HyperlinkedIdentityField
-    url           = serializers.HyperlinkedIdentityField(read_only=True,view_name='blogApp:post-detail',lookup_field='slug')  
+    url           = serializers.HyperlinkedIdentityField(read_only=True, view_name='blogApp:post-detail', lookup_field='slug', lookup_url_kwarg='slug')  
     # ForeignKey
     category      = serializers.SlugRelatedField(
                                                 queryset = Category.objects.all(),
@@ -87,7 +87,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     # ManyToManyField                                            
     likes       = RegisterSerializer(many=True, read_only=True)
     # related_name -->> come from ForeignKey in Comment model  
-    comments_post = serializers.HyperlinkedRelatedField(read_only=True,view_name='blogApp:comment-detail',many=True,lookup_field='id' )
+    comments_post = serializers.HyperlinkedRelatedField(read_only=True, view_name='blogApp:comment-detail', many=True, lookup_field='id', lookup_url_kwarg='id')
     
     class Meta:
         model            = Post 
@@ -136,7 +136,7 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     )
     allowed       = serializers.BooleanField(default=True)
     # url - mean -> comment detail and use HyperlinkedIdentityField
-    url           = serializers.HyperlinkedIdentityField(read_only=True,view_name='blogApp:comment-detail',lookup_field='id')  
+    url           = serializers.HyperlinkedIdentityField(read_only=True, view_name='blogApp:comment-detail', lookup_field='id', lookup_url_kwarg='id')  
 
     # Forignkey
     post          = serializers.SlugRelatedField(

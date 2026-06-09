@@ -1,6 +1,6 @@
-asgiref==3.5.2
-Django==3.2.16
-djangorestframework==3.14.0
-pytz==2022.6
-sqlparse==0.4.3
-typing_extensions==4.4.0
+asgiref==3.11.1
+Django==5.2.15
+djangorestframework==3.17.1
+pillow==12.2.0
+sqlparse==0.5.5
+tzdata==2026.2

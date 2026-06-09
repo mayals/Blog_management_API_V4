@@ -42,32 +42,41 @@ class RegisterSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(read_only=True,
                                                view_name='authApp:UserModel-detail',
                                                lookup_field='username',
-                                              
+                                               lookup_url_kwarg='username',
     )
     # related_name -->> come from ForeignKey in Post model
     posts_author =  serializers.HyperlinkedRelatedField(read_only=True,
                                                         view_name='blogApp:post-detail', 
                                                         many=True,
-                                                        lookup_field='slug'
+                                                        lookup_field='slug',
+                                                        lookup_url_kwarg='slug'
     )
     # related_name -->> come from ForeignKey in Comment model
     comments_author =  serializers.HyperlinkedRelatedField(read_only=True,
                                                         view_name='blogApp:comment-detail', 
                                                         many=True,
-                                                        lookup_field='id'
+                                                        lookup_field='id',
+                                                        lookup_url_kwarg='id'
     )
     # related_name -->> come from mManyToManyField in Post model 
     users_likes = serializers.HyperlinkedRelatedField(read_only=True,
                                                         view_name='blogApp:post-detail', 
                                                         many=True,
-                                                        lookup_field='slug'
+                                                        lookup_field='slug',
+                                                        lookup_url_kwarg='slug'
+    )
+    favorites = serializers.HyperlinkedRelatedField(read_only=True,
+                                                        view_name='blogApp:post-detail',
+                                                        many=True,
+                                                        lookup_field='slug',
+                                                        lookup_url_kwarg='slug'
     )
     class Meta:
         model  = UserModel 
         fields = [
             'username','email','password','password2',
             'first_name','last_name','gender','born_date','country','avatar','bio','website',
-            'url','posts_author','comments_author','favorites'
+            'url','posts_author','comments_author','users_likes', 'favorites'
         ]
         write_only_fields = ['password','password2']
         read_only_fields = ['url','posts_author','comments_author','likes_author']
@@ -189,17 +198,25 @@ class ProfileSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(read_only=True,
                                                view_name='authApp:UserModel-detail',
                                                lookup_field='username',
-                                              
+                                               lookup_url_kwarg='username',
     )
     posts_author =  serializers.HyperlinkedRelatedField(read_only=True,
                                                         view_name='blogApp:post-detail', 
                                                         many=True,
-                                                        lookup_field='slug'
+                                                        lookup_field='slug',
+                                                        lookup_url_kwarg='slug'
     )
     comments_author =  serializers.HyperlinkedRelatedField(read_only=True,
                                                         view_name='blogApp:comment-detail', 
                                                         many=True,
-                                                        lookup_field='id'
+                                                        lookup_field='id',
+                                                        lookup_url_kwarg='id'
+    )
+    favorites = serializers.HyperlinkedRelatedField(read_only=True,
+                                                        view_name='blogApp:post-detail',
+                                                        many=True,
+                                                        lookup_field='slug',
+                                                        lookup_url_kwarg='slug'
     )
     
 
